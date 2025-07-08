@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "fairylights",
+  "version": "${version}",
+  "name": "Fairy Lights",
+  "description": "Adds new colours to lighting blocks.",
+  "authors": [
+    "oathompsonjones",
+    "Random Nautilus"
+  ],
+  "contact": {
+    "homepage": "https://github.com/oathompsonjones/fairy-lights",
+    "sources": "https://github.com/oathompsonjones/fairy-lights"
+  },
+  "license": "MIT",
+  "icon": "assets/fairylights/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "uk.co.oathompsonjones.FairyLights"
+    ],
+    "client": [
+      "uk.co.oathompsonjones.FairyLightsClient"
+    ],
+    "fabric-datagen": [
+      "uk.co.oathompsonjones.FairyLightsDataGenerator"
+    ]
+  },
+  "mixins": [
+    "fairylights.mixins.json"
+  ],
+  "client": [
+    "fairylights.client.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "fabric-api": "*"
+  },
+  "suggests": {
+  }
+}
