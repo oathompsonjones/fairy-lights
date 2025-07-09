@@ -11,12 +11,13 @@ public class FairyLightsClient implements ClientModInitializer {
     public void onInitializeClient() {
         // This entrypoint is suitable for setting up client-specific logic, such as rendering.
         for (String color : FairyLights.COLORS) {
+            BlockRenderLayerMap.INSTANCE.putBlock(FairyLightsBlocks.LANTERN_BLOCKS.get(color), RenderLayer.getCutout());
             BlockRenderLayerMap.INSTANCE.putBlock(FairyLightsBlocks.TORCH_BLOCKS.get(color), RenderLayer.getCutout());
             BlockRenderLayerMap.INSTANCE.putBlock(FairyLightsBlocks.WALL_TORCH_BLOCKS.get(color),
-                                                  RenderLayer.getCutout()
+                    RenderLayer.getCutout()
             );
             ParticleFactoryRegistry.getInstance().register(FairyLightsParticles.FLAMES.get(color),
-                                                           FlameParticle.Factory::new
+                    FlameParticle.Factory::new
             );
         }
     }

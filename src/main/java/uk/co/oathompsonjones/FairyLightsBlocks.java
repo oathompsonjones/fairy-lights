@@ -28,6 +28,12 @@ public class FairyLightsBlocks {
                     color -> register(new Block(AbstractBlock.Settings.copy(Blocks.GLOWSTONE)), color + "_glowstone")
             ));
 
+    public static final Map<String, Block> LANTERN_BLOCKS = Arrays.stream(FairyLights.COLORS).collect(Collectors.toMap(color -> color,
+            color -> register(new LanternBlock(AbstractBlock.Settings.copy(Blocks.LANTERN).nonOpaque()),
+                    color + "_lantern"
+            )
+    ));
+
     public static final Map<String, Block> TORCH_BLOCKS = new HashMap<>();
     public static final Map<String, Block> WALL_TORCH_BLOCKS = new HashMap<>();
 
@@ -72,6 +78,10 @@ public class FairyLightsBlocks {
         // Register all the blocks in the item group
         for (String color : FairyLights.COLORS)
             ItemGroupEvents.modifyEntriesEvent(ITEM_GROUP).register((group) -> group.add(GLOWSTONE_BLOCKS
+                    .get(color)
+                    .asItem()));
+        for (String color : FairyLights.COLORS)
+            ItemGroupEvents.modifyEntriesEvent(ITEM_GROUP).register((group) -> group.add(LANTERN_BLOCKS
                     .get(color)
                     .asItem()));
         for (String color : FairyLights.COLORS)

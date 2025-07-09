@@ -1,6 +1,9 @@
 package uk.co.oathompsonjones;
 
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.item.DyeItem;
+import net.minecraft.item.Item;
+import net.minecraft.util.DyeColor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +33,10 @@ public class FairyLights implements ModInitializer {
             "magenta",
             "pink"
     };
+
+    public static Item getDye(String color) {
+        return DyeItem.byColor(DyeColor.byName(color, DyeColor.WHITE));
+    }
 
     @Override
     public void onInitialize() {

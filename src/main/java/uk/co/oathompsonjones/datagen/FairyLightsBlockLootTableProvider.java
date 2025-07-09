@@ -4,8 +4,6 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.DyeItem;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
@@ -19,7 +17,6 @@ import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.predicate.NumberRange.IntRange;
 import net.minecraft.predicate.item.EnchantmentPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
-import net.minecraft.util.DyeColor;
 import uk.co.oathompsonjones.FairyLights;
 import uk.co.oathompsonjones.FairyLightsBlocks;
 
@@ -32,13 +29,10 @@ public class FairyLightsBlockLootTableProvider extends FabricBlockLootTableProvi
     public void generate() {
         for (String color : FairyLights.COLORS) {
             addCustomGlowstone(FairyLightsBlocks.GLOWSTONE_BLOCKS.get(color), color);
+            addDrop(FairyLightsBlocks.LANTERN_BLOCKS.get(color));
             addDrop(FairyLightsBlocks.TORCH_BLOCKS.get(color));
             addDrop(FairyLightsBlocks.WALL_TORCH_BLOCKS.get(color), FairyLightsBlocks.TORCH_BLOCKS.get(color));
         }
-    }
-
-    private ItemConvertible getDye(String color) {
-        return DyeItem.byColor(DyeColor.byName(color, DyeColor.WHITE));
     }
 
     private void addCustomGlowstone(Block block, String color) {
@@ -64,7 +58,7 @@ public class FairyLightsBlockLootTableProvider extends FabricBlockLootTableProvi
                         .create()
                         .enchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, IntRange.ANY)))),
                 RandomChanceLootCondition.builder(0.5f)
-        )).with(ItemEntry.builder(getDye(color)));
+        )).with(ItemEntry.builder(FairyLights.getDye(color)));
 
         addDrop(block, LootTable.builder().pool(silkTouchPool).pool(dustPool).pool(dyePool));
     }
