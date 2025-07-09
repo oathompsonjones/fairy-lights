@@ -51,5 +51,8 @@ public class FairyLights implements ModInitializer {
 
         // Register all items, item groups and blocks
         FairyLightsBlocks.initialize();
+
+        // Register all block entities
+        FairyLightsBlockEntities.initialize();
     }
 }

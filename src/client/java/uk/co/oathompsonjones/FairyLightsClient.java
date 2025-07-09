@@ -19,6 +19,9 @@ public class FairyLightsClient implements ClientModInitializer {
             ParticleFactoryRegistry.getInstance().register(FairyLightsParticles.FLAMES.get(color),
                     FlameParticle.Factory::new
             );
+            ParticleFactoryRegistry.getInstance().register(FairyLightsParticles.SMALL_FLAMES.get(color),
+                    FlameParticle.SmallFactory::new
+            );
         }
     }
 }

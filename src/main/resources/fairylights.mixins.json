@@ -3,6 +3,8 @@
   "package": "uk.co.oathompsonjones.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AbstractCandleBlockMixin",
+    "CandleBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

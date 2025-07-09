@@ -30,12 +30,15 @@ public class FairyLightsParticleProvider implements DataProvider {
             textures.add(FairyLights.MOD_ID + ":" + color + "_flame");
             json.add("textures", textures);
 
-            Path filePath = output.getResolver(FabricDataOutput.OutputType.RESOURCE_PACK, "particles").resolve(
-                    Identifier.of(FairyLights.MOD_ID, color + "_flame"),
+            Path filePath1 = output.getResolver(FabricDataOutput.OutputType.RESOURCE_PACK, "particles").resolve(Identifier.of(FairyLights.MOD_ID, color + "_flame"),
+                    "json"
+            );
+            Path filePath2 = output.getResolver(FabricDataOutput.OutputType.RESOURCE_PACK, "particles").resolve(Identifier.of(FairyLights.MOD_ID, color + "_small_flame"),
                     "json"
             );
 
-            futures.add(DataProvider.writeToPath(writer, json, filePath));
+            futures.add(DataProvider.writeToPath(writer, json, filePath1));
+            futures.add(DataProvider.writeToPath(writer, json, filePath2));
         }
 
         return CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));

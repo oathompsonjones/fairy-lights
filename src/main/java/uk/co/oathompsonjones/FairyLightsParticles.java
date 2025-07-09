@@ -15,10 +15,13 @@ public class FairyLightsParticles {
             .stream(FairyLights.COLORS)
             .collect(Collectors.toMap(color -> color, color -> register(color + "_flame")));
 
+    public static final Map<String, DefaultParticleType> SMALL_FLAMES = Arrays.stream(FairyLights.COLORS).collect(
+            Collectors.toMap(color -> color, color -> register(color + "_small_flame")));
+
     public static DefaultParticleType register(String name) {
         return Registry.register(Registries.PARTICLE_TYPE,
-                                 new Identifier(FairyLights.MOD_ID, name),
-                                 FabricParticleTypes.simple()
+                new Identifier(FairyLights.MOD_ID, name),
+                FabricParticleTypes.simple()
         );
     }
 
