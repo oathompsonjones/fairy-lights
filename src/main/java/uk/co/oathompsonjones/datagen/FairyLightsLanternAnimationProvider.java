@@ -29,12 +29,15 @@ public class FairyLightsLanternAnimationProvider implements DataProvider {
             animation.addProperty("frametime", 8);
             json.add("animation", animation);
 
-            Path filePath = output.getResolver(FabricDataOutput.OutputType.RESOURCE_PACK, "textures/block").resolve(
-                    Identifier.of(FairyLights.MOD_ID, color + "_lantern"),
+            Path filePath1 = output.getResolver(FabricDataOutput.OutputType.RESOURCE_PACK, "textures/block").resolve(Identifier.of(FairyLights.MOD_ID, color + "_lantern"),
+                    "png.mcmeta"
+            );
+            Path filePath2 = output.getResolver(FabricDataOutput.OutputType.RESOURCE_PACK, "textures/block").resolve(Identifier.of(FairyLights.MOD_ID, color + "_sea_lantern"),
                     "png.mcmeta"
             );
 
-            futures.add(DataProvider.writeToPath(writer, json, filePath));
+            futures.add(DataProvider.writeToPath(writer, json, filePath1));
+            futures.add(DataProvider.writeToPath(writer, json, filePath2));
         }
 
         return CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));

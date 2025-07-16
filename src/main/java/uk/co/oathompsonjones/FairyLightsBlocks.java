@@ -9,7 +9,9 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.BlockView;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -34,6 +36,14 @@ public class FairyLightsBlocks {
             )
     ));
 
+    public static final Map<String, Block> SEA_LANTERN_BLOCKS = Arrays
+            .stream(FairyLights.COLORS)
+            .collect(Collectors.toMap(color -> color,
+                    color -> register(new Block(AbstractBlock.Settings.copy(Blocks.SEA_LANTERN).nonOpaque()),
+                            color + "_sea_lantern"
+                    )
+            ));
+
     public static final Map<String, Block> TORCH_BLOCKS = new HashMap<>();
     public static final Map<String, Block> WALL_TORCH_BLOCKS = new HashMap<>();
 
@@ -42,9 +52,9 @@ public class FairyLightsBlocks {
             TorchBlock torch = new TorchBlock(AbstractBlock.Settings.copy(Blocks.TORCH).nonOpaque(),
                     FairyLightsParticles.FLAMES.get(color)
             );
-            WallTorchBlock wallTorch = new WallTorchBlock(AbstractBlock.Settings.copy(Blocks.WALL_TORCH).nonOpaque(),
-                    FairyLightsParticles.FLAMES.get(color)
-            );
+            WallTorchBlock wallTorch = new FairyLightsWallTorchBlock(AbstractBlock.Settings
+                    .copy(Blocks.WALL_TORCH)
+                    .nonOpaque(), color);
 
             TORCH_BLOCKS.put(color, register(torch, color + "_torch", () -> new TorchItem(torch, wallTorch)));
             WALL_TORCH_BLOCKS.put(color, register(wallTorch, "wall_" + color + "_torch", null));
@@ -81,6 +91,10 @@ public class FairyLightsBlocks {
                     .get(color)
                     .asItem()));
         for (String color : FairyLights.COLORS)
+            ItemGroupEvents.modifyEntriesEvent(ITEM_GROUP).register((group) -> group.add(SEA_LANTERN_BLOCKS
+                    .get(color)
+                    .asItem()));
+        for (String color : FairyLights.COLORS)
             ItemGroupEvents.modifyEntriesEvent(ITEM_GROUP).register((group) -> group.add(LANTERN_BLOCKS
                     .get(color)
                     .asItem()));
@@ -105,6 +119,20 @@ public class FairyLightsBlocks {
                     && wallState.canPlaceAt(context.getWorld(), context.getBlockPos())
                     && context.getSide() != Direction.UP
                     && context.getSide() != Direction.DOWN ? wallState : super.getPlacementState(context);
+        }
+    }
+
+    private static class FairyLightsWallTorchBlock extends WallTorchBlock {
+        private final String color;
+
+        public FairyLightsWallTorchBlock(AbstractBlock.Settings settings, String color) {
+            super(settings, FairyLightsParticles.FLAMES.get(color));
+            this.color = color;
+        }
+
+        @Override
+        public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+            return new ItemStack(TORCH_BLOCKS.get(color));
         }
     }
 }

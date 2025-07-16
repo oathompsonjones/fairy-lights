@@ -20,6 +20,7 @@ public class FairyLightsModelProvider extends FabricModelProvider {
             blockStateModelGenerator.registerTorch(FairyLightsBlocks.TORCH_BLOCKS.get(color),
                     FairyLightsBlocks.WALL_TORCH_BLOCKS.get(color)
             );
+            blockStateModelGenerator.registerSimpleCubeAll(FairyLightsBlocks.SEA_LANTERN_BLOCKS.get(color));
         }
     }
 

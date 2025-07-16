@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Block;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
@@ -95,7 +96,23 @@ public class FairyLightsRecipeProvider extends FabricRecipeProvider {
                             FabricRecipeProvider.conditionsFromItem(Items.IRON_NUGGET)
                     )
                     .criterion(FabricRecipeProvider.hasItem(torch), FabricRecipeProvider.conditionsFromItem(torch))
-                    .offerTo(exporter, Identifier.of(FairyLights.MOD_ID, color + "_lantern"));
+                    .offerTo(
+                            exporter,
+                            Identifier.of(FairyLights.MOD_ID, color + "_lantern")
+                    );
+
+            // Sea Lanterns
+            Block seaLantern = FairyLightsBlocks.SEA_LANTERN_BLOCKS.get(color);
+            ShapelessRecipeJsonBuilder
+                    .create(RecipeCategory.DECORATIONS, seaLantern)
+                    .input(Items.SEA_LANTERN)
+                    .input(dye)
+                    .group(Objects.requireNonNull(Identifier.of(FairyLights.MOD_ID, color + "_sea_lantern")).toString())
+                    .criterion(FabricRecipeProvider.hasItem(Items.PRISMARINE_SHARD),
+                            FabricRecipeProvider.conditionsFromItem(Items.PRISMARINE_SHARD)
+                    )
+                    .criterion(FabricRecipeProvider.hasItem(dye), FabricRecipeProvider.conditionsFromItem(dye))
+                    .offerTo(exporter, Identifier.of(FairyLights.MOD_ID, color + "_sea_lantern"));
         }
     }
 }

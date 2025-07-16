@@ -29,6 +29,7 @@ public class FairyLightsBlockLootTableProvider extends FabricBlockLootTableProvi
     public void generate() {
         for (String color : FairyLights.COLORS) {
             addCustomGlowstone(FairyLightsBlocks.GLOWSTONE_BLOCKS.get(color), color);
+            addCustomSeaLantern(FairyLightsBlocks.SEA_LANTERN_BLOCKS.get(color), color);
             addDrop(FairyLightsBlocks.LANTERN_BLOCKS.get(color));
             addDrop(FairyLightsBlocks.TORCH_BLOCKS.get(color));
             addDrop(FairyLightsBlocks.WALL_TORCH_BLOCKS.get(color), FairyLightsBlocks.TORCH_BLOCKS.get(color));
@@ -61,5 +62,33 @@ public class FairyLightsBlockLootTableProvider extends FabricBlockLootTableProvi
         )).with(ItemEntry.builder(FairyLights.getDye(color)));
 
         addDrop(block, LootTable.builder().pool(silkTouchPool).pool(dustPool).pool(dyePool));
+    }
+
+    private void addCustomSeaLantern(Block block, String color) {
+        // Pool 1: Silk Touch drops the block, no dye
+        LootPool.Builder silkTouchPool = LootPool
+                .builder()
+                .conditionally(MatchToolLootCondition.builder(ItemPredicate.Builder
+                        .create()
+                        .enchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, IntRange.ANY))))
+                .with(ItemEntry.builder(block));
+
+        // Pool 2: No Silk Touch drops 3 prismarine crystals always
+        LootPool.Builder crystalPool = LootPool.builder().conditionally(InvertedLootCondition.builder(
+                MatchToolLootCondition.builder(ItemPredicate.Builder
+                        .create()
+                        .enchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, IntRange.ANY))))).with(ItemEntry
+                .builder(Items.PRISMARINE_CRYSTALS)
+                .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(3))));
+
+        // Pool 3: No Silk Touch drops dye with 50% chance
+        LootPool.Builder dyePool = LootPool.builder().conditionally(AllOfLootCondition.builder(
+                InvertedLootCondition.builder(MatchToolLootCondition.builder(ItemPredicate.Builder
+                        .create()
+                        .enchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, IntRange.ANY)))),
+                RandomChanceLootCondition.builder(0.5f)
+        )).with(ItemEntry.builder(FairyLights.getDye(color)));
+
+        addDrop(block, LootTable.builder().pool(silkTouchPool).pool(crystalPool).pool(dyePool));
     }
 }
