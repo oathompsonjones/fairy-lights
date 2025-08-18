@@ -9,11 +9,11 @@ import net.minecraft.util.Identifier;
 
 public class FairyLightsBlockEntities {
     public static void initialize() {
-    }    public static final BlockEntityType<ColoredCandleBlockEntity> COLOURED_CANDLE = Registry.register(
+    }
+
+    public static final BlockEntityType<ColoredCandleBlockEntity> COLOURED_CANDLE = Registry.register(
             Registries.BLOCK_ENTITY_TYPE,
             new Identifier(FairyLights.MOD_ID, "coloured_candle"),
             FabricBlockEntityTypeBuilder.create(ColoredCandleBlockEntity::new, Blocks.CANDLE).build(null)
     );
-
-
 }

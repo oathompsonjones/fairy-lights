@@ -3,15 +3,18 @@ package uk.co.oathompsonjones;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.*;
-import net.minecraft.item.*;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
+import uk.co.oathompsonjones.endrod.FairyLightsEndRodBlock;
+import uk.co.oathompsonjones.torch.FairyLightsTorchItem;
+import uk.co.oathompsonjones.torch.FairyLightsWallTorchBlock;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -44,6 +47,12 @@ public class FairyLightsBlocks {
                     )
             ));
 
+    public static final Map<String, Block> END_ROD_BLOCKS = Arrays.stream(FairyLights.COLORS).collect(Collectors.toMap(color -> color,
+            color -> register(new FairyLightsEndRodBlock(AbstractBlock.Settings.copy(Blocks.END_ROD).nonOpaque(),
+                    color
+            ), color + "_end_rod")
+    ));
+
     public static final Map<String, Block> TORCH_BLOCKS = new HashMap<>();
     public static final Map<String, Block> WALL_TORCH_BLOCKS = new HashMap<>();
 
@@ -56,7 +65,9 @@ public class FairyLightsBlocks {
                     .copy(Blocks.WALL_TORCH)
                     .nonOpaque(), color);
 
-            TORCH_BLOCKS.put(color, register(torch, color + "_torch", () -> new TorchItem(torch, wallTorch)));
+            TORCH_BLOCKS.put(color,
+                    register(torch, color + "_torch", () -> new FairyLightsTorchItem(torch, wallTorch))
+            );
             WALL_TORCH_BLOCKS.put(color, register(wallTorch, "wall_" + color + "_torch", null));
         }
     }
@@ -102,37 +113,9 @@ public class FairyLightsBlocks {
             ItemGroupEvents.modifyEntriesEvent(ITEM_GROUP).register((group) -> group.add(TORCH_BLOCKS
                     .get(color)
                     .asItem()));
-    }
-
-    private static class TorchItem extends BlockItem {
-        private final Block wallBlock;
-
-        public TorchItem(Block standingBlock, Block wallBlock) {
-            super(standingBlock, new Item.Settings());
-            this.wallBlock = wallBlock;
-        }
-
-        @Override
-        protected BlockState getPlacementState(ItemPlacementContext context) {
-            BlockState wallState = this.wallBlock.getPlacementState(context);
-            return wallState != null
-                    && wallState.canPlaceAt(context.getWorld(), context.getBlockPos())
-                    && context.getSide() != Direction.UP
-                    && context.getSide() != Direction.DOWN ? wallState : super.getPlacementState(context);
-        }
-    }
-
-    private static class FairyLightsWallTorchBlock extends WallTorchBlock {
-        private final String color;
-
-        public FairyLightsWallTorchBlock(AbstractBlock.Settings settings, String color) {
-            super(settings, FairyLightsParticles.FLAMES.get(color));
-            this.color = color;
-        }
-
-        @Override
-        public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-            return new ItemStack(TORCH_BLOCKS.get(color));
-        }
+        for (String color : FairyLights.COLORS)
+            ItemGroupEvents.modifyEntriesEvent(ITEM_GROUP).register((group) -> group.add(END_ROD_BLOCKS
+                    .get(color)
+                    .asItem()));
     }
 }

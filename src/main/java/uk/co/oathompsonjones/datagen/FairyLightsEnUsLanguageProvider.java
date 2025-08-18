@@ -37,6 +37,7 @@ public class FairyLightsEnUsLanguageProvider extends FabricLanguageProvider {
             translationBuilder.add("block." + FairyLights.MOD_ID + "." + color + "_sea_lantern",
                     newColor + " Sea Lantern"
             );
+            translationBuilder.add("block." + FairyLights.MOD_ID + "." + color + "_end_rod", newColor + " End Rod");
         }
     }
 }

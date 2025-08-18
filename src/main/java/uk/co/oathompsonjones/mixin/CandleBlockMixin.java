@@ -1,6 +1,9 @@
 package uk.co.oathompsonjones.mixin;
 
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractCandleBlock;
+import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.CandleBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.DyeItem;
@@ -17,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.co.oathompsonjones.ColoredCandleBlockEntity;
 
 @Mixin(CandleBlock.class)
-public abstract class CandleBlockMixin extends AbstractCandleBlock implements Waterloggable, BlockEntityProvider {
+public abstract class CandleBlockMixin extends AbstractCandleBlock implements BlockEntityProvider {
     protected CandleBlockMixin(Settings settings) {
         super(settings);
     }
@@ -38,14 +41,12 @@ public abstract class CandleBlockMixin extends AbstractCandleBlock implements Wa
             CallbackInfoReturnable<ActionResult> ci
     ) {
         ItemStack stack = player.getStackInHand(hand);
-        if (stack.getItem() instanceof DyeItem dyeItem) {
-            BlockEntity be = world.getBlockEntity(pos);
-            if (be instanceof ColoredCandleBlockEntity candleBE) {
-                candleBE.setFlameColour(dyeItem.getColor());
-                if (!player.isCreative())
-                    stack.decrement(1);
-                ci.setReturnValue(ActionResult.SUCCESS);
-            }
+        if (stack.getItem() instanceof DyeItem dyeItem
+                && world.getBlockEntity(pos) instanceof ColoredCandleBlockEntity candleBlockEntity) {
+            candleBlockEntity.setFlameColour(dyeItem.getColor());
+            if (!player.isCreative())
+                stack.decrement(1);
+            ci.setReturnValue(ActionResult.SUCCESS);
         }
     }
 }

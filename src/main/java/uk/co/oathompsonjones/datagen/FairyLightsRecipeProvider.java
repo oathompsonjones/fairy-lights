@@ -96,10 +96,7 @@ public class FairyLightsRecipeProvider extends FabricRecipeProvider {
                             FabricRecipeProvider.conditionsFromItem(Items.IRON_NUGGET)
                     )
                     .criterion(FabricRecipeProvider.hasItem(torch), FabricRecipeProvider.conditionsFromItem(torch))
-                    .offerTo(
-                            exporter,
-                            Identifier.of(FairyLights.MOD_ID, color + "_lantern")
-                    );
+                    .offerTo(exporter, Identifier.of(FairyLights.MOD_ID, color + "_lantern"));
 
             // Sea Lanterns
             Block seaLantern = FairyLightsBlocks.SEA_LANTERN_BLOCKS.get(color);
@@ -113,6 +110,19 @@ public class FairyLightsRecipeProvider extends FabricRecipeProvider {
                     )
                     .criterion(FabricRecipeProvider.hasItem(dye), FabricRecipeProvider.conditionsFromItem(dye))
                     .offerTo(exporter, Identifier.of(FairyLights.MOD_ID, color + "_sea_lantern"));
+
+            // End Rods
+            Block endRod = FairyLightsBlocks.END_ROD_BLOCKS.get(color);
+            ShapelessRecipeJsonBuilder
+                    .create(RecipeCategory.DECORATIONS, endRod)
+                    .input(Items.END_ROD)
+                    .input(dye)
+                    .group(Objects.requireNonNull(Identifier.of(FairyLights.MOD_ID, color + "_end_rod")).toString())
+                    .criterion(FabricRecipeProvider.hasItem(Items.END_ROD),
+                            FabricRecipeProvider.conditionsFromItem(Items.END_ROD)
+                    )
+                    .criterion(FabricRecipeProvider.hasItem(dye), FabricRecipeProvider.conditionsFromItem(dye))
+                    .offerTo(exporter, Identifier.of(FairyLights.MOD_ID, color + "_end_rod"));
         }
     }
 }

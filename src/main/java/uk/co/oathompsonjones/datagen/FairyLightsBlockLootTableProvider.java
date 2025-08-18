@@ -33,6 +33,7 @@ public class FairyLightsBlockLootTableProvider extends FabricBlockLootTableProvi
             addDrop(FairyLightsBlocks.LANTERN_BLOCKS.get(color));
             addDrop(FairyLightsBlocks.TORCH_BLOCKS.get(color));
             addDrop(FairyLightsBlocks.WALL_TORCH_BLOCKS.get(color), FairyLightsBlocks.TORCH_BLOCKS.get(color));
+            addDrop(FairyLightsBlocks.END_ROD_BLOCKS.get(color));
         }
     }
 
