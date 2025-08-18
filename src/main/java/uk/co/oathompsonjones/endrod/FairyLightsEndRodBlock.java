@@ -9,7 +9,6 @@ import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.DyeColor;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -19,9 +18,9 @@ import net.minecraft.world.World;
 public class FairyLightsEndRodBlock extends EndRodBlock {
     public static final ColorProperty BASE_COLOR = ColorProperty.of("base_color");
 
-    public FairyLightsEndRodBlock(AbstractBlock.Settings settings, String defaultColor) {
+    public FairyLightsEndRodBlock(AbstractBlock.Settings settings) {
         super(settings);
-        setDefaultState(getStateManager().getDefaultState().with(BASE_COLOR, DyeColor.byName(defaultColor, null)));
+        setDefaultState(getStateManager().getDefaultState().with(BASE_COLOR, NullableDyeColor.byName("null", null)));
     }
 
     @Override
@@ -41,7 +40,7 @@ public class FairyLightsEndRodBlock extends EndRodBlock {
     ) {
         ItemStack stack = player.getStackInHand(hand);
         if (stack.getItem() instanceof DyeItem dye) {
-            DyeColor color = dye.getColor();
+            NullableDyeColor color = NullableDyeColor.byDyeColor(dye.getColor());
             if (color != state.get(BASE_COLOR)) {
                 world.setBlockState(pos, state.with(BASE_COLOR, color), Block.NOTIFY_ALL);
                 if (!player.isCreative())

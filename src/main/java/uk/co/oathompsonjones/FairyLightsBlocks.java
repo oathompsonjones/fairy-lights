@@ -47,10 +47,12 @@ public class FairyLightsBlocks {
                     )
             ));
 
-    public static final Map<String, Block> END_ROD_BLOCKS = Arrays.stream(FairyLights.COLORS).collect(Collectors.toMap(color -> color,
-            color -> register(new FairyLightsEndRodBlock(AbstractBlock.Settings.copy(Blocks.END_ROD).nonOpaque(),
-                    color
-            ), color + "_end_rod")
+    public static final Map<String, Block> END_ROD_BLOCKS = Arrays.stream(FairyLights.COLORS).collect(Collectors.toMap(
+            color -> color,
+            color -> register(
+                    new FairyLightsEndRodBlock(AbstractBlock.Settings.copy(Blocks.END_ROD).nonOpaque()),
+                    color + "_end_rod"
+            )
     ));
 
     public static final Map<String, Block> TORCH_BLOCKS = new HashMap<>();

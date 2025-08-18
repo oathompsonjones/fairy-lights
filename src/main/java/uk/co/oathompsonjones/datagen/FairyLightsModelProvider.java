@@ -4,12 +4,12 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
-import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import uk.co.oathompsonjones.FairyLights;
 import uk.co.oathompsonjones.FairyLightsBlocks;
 import uk.co.oathompsonjones.endrod.FairyLightsEndRodBlock;
+import uk.co.oathompsonjones.endrod.NullableDyeColor;
 
 import java.util.Optional;
 
@@ -36,32 +36,24 @@ public class FairyLightsModelProvider extends FabricModelProvider {
     }
 
     private void registerEndRod(BlockStateModelGenerator blockStateModelGenerator, String rodColor) {
-        // TODO: Use block states to change base colour.
-        //  Each block state file needs to handle the 16 possible colors alongside the 6 directions.
-        //  Generate a model for each possible end rod colour combination.
-        //  Use texture layers to apply the base texture over the rod texture.
-        //  Model files: <rod_colour>_end_rod_<base_colour>_base.json
-        //  Block state files: <rod_colour>_end_rod.json
-
         Block      BLOCK    = FairyLightsBlocks.END_ROD_BLOCKS.get(rodColor);
         TextureKey ROD      = TextureKey.of("rod");
         TextureKey BASE     = TextureKey.of("base");
         Identifier TEMPLATE = Identifier.of(FairyLights.MOD_ID, "block/end_rod_template");
 
         Model endRodModel = new Model(Optional.ofNullable(TEMPLATE), Optional.empty(), ROD, BASE);
-        BlockStateVariantMap.DoubleProperty<Direction, DyeColor> blockStateVariantMap = BlockStateVariantMap.create(FairyLightsEndRodBlock.FACING,
-                FairyLightsEndRodBlock.BASE_COLOR
-        );
+        BlockStateVariantMap.DoubleProperty<Direction, NullableDyeColor>
+                blockStateVariantMap
+                = BlockStateVariantMap.create(FairyLightsEndRodBlock.FACING, FairyLightsEndRodBlock.BASE_COLOR);
 
-        Identifier itemModelId = null;
+        Identifier itemModelId   = null;
+        Identifier rodIdentifier = new Identifier(FairyLights.MOD_ID, "block/" + rodColor + "_end_rod");
 
-        for (DyeColor baseColor : DyeColor.values()) {
-            TextureMap textureMap = new TextureMap().put(ROD,
-                    new Identifier(FairyLights.MOD_ID, "block/" + rodColor + "_end_rod")
-            ).put(
-                    BASE,
-                    new Identifier(FairyLights.MOD_ID, "block/" + baseColor.getName() + "_end_rod_base")
-            );
+        for (NullableDyeColor baseColor : NullableDyeColor.values()) {
+            Identifier baseIdentifier = baseColor == NullableDyeColor.NULL
+                    ? rodIdentifier
+                    : new Identifier(FairyLights.MOD_ID, "block/" + baseColor.getName() + "_end_rod_base");
+            TextureMap textureMap = new TextureMap().put(ROD, rodIdentifier).put(BASE, baseIdentifier);
 
             Identifier modelId = endRodModel.upload(
                     new Identifier(FairyLights.MOD_ID,
