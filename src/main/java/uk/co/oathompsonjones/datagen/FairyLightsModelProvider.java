@@ -75,10 +75,24 @@ public class FairyLightsModelProvider extends FabricModelProvider {
                 itemModelId = modelId;
 
             for (Direction direction : Direction.values()) {
-                blockStateVariantMap.register(direction,
-                        baseColor,
-                        BlockStateVariant.create().put(VariantSettings.MODEL, modelId)
-                );
+                BlockStateVariant variant = BlockStateVariant.create().put(VariantSettings.MODEL, modelId);
+
+                switch (direction) {
+                    case UP -> { }
+                    case DOWN -> variant = variant.put(VariantSettings.X, VariantSettings.Rotation.R180);
+                    case NORTH -> variant = variant.put(VariantSettings.X, VariantSettings.Rotation.R90);
+                    case SOUTH -> variant = variant.put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y,
+                            VariantSettings.Rotation.R180
+                    );
+                    case WEST -> variant = variant.put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y,
+                            VariantSettings.Rotation.R270
+                    );
+                    case EAST -> variant = variant.put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y,
+                            VariantSettings.Rotation.R90
+                    );
+                }
+
+                blockStateVariantMap.register(direction, baseColor, variant);
             }
         }
 
