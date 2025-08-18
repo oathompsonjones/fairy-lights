@@ -63,7 +63,7 @@ public class FairyLightsModelProvider extends FabricModelProvider {
                     blockStateModelGenerator.modelCollector
             );
 
-            if (baseColor.getName().equals(rodColor))
+            if (baseColor.getName().equals("null"))
                 itemModelId = modelId;
 
             for (Direction direction : Direction.values()) {
