@@ -1,4 +1,4 @@
-package uk.co.oathompsonjones.datagen;
+package uk.co.oathompsonjones.fairylights.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
@@ -17,8 +17,8 @@ import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.predicate.NumberRange.IntRange;
 import net.minecraft.predicate.item.EnchantmentPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
-import uk.co.oathompsonjones.FairyLights;
-import uk.co.oathompsonjones.FairyLightsBlocks;
+import uk.co.oathompsonjones.fairylights.FairyLights;
+import uk.co.oathompsonjones.fairylights.FairyLightsBlocks;
 
 public class FairyLightsBlockLootTableProvider extends FabricBlockLootTableProvider {
     public FairyLightsBlockLootTableProvider(FabricDataOutput output) {

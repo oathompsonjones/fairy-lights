@@ -1,4 +1,4 @@
-package uk.co.oathompsonjones.datagen;
+package uk.co.oathompsonjones.fairylights.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
@@ -6,8 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
-import uk.co.oathompsonjones.FairyLights;
-import uk.co.oathompsonjones.FairyLightsBlocks;
+import uk.co.oathompsonjones.fairylights.FairyLights;
+import uk.co.oathompsonjones.fairylights.FairyLightsBlocks;
 
 import java.util.concurrent.CompletableFuture;
 

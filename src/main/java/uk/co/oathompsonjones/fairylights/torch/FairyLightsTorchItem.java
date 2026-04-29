@@ -1,4 +1,4 @@
-package uk.co.oathompsonjones.torch;
+package uk.co.oathompsonjones.fairylights.torch;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

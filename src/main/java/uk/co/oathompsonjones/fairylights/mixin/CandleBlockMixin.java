@@ -1,4 +1,4 @@
-package uk.co.oathompsonjones.mixin;
+package uk.co.oathompsonjones.fairylights.mixin;
 
 import net.minecraft.block.AbstractCandleBlock;
 import net.minecraft.block.BlockEntityProvider;
@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.co.oathompsonjones.ColoredCandleBlockEntity;
+import uk.co.oathompsonjones.fairylights.ColoredCandleBlockEntity;
 
 @Mixin(CandleBlock.class)
 public abstract class CandleBlockMixin extends AbstractCandleBlock implements BlockEntityProvider {

@@ -1,11 +1,11 @@
-package uk.co.oathompsonjones.datagen;
+package uk.co.oathompsonjones.fairylights.datagen;
 
 import com.google.gson.JsonObject;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.DataWriter;
 import net.minecraft.util.Identifier;
-import uk.co.oathompsonjones.FairyLights;
+import uk.co.oathompsonjones.fairylights.FairyLights;
 
 import java.nio.file.Path;
 import java.util.ArrayList;

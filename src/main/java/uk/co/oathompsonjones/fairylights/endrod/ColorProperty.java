@@ -1,4 +1,4 @@
-package uk.co.oathompsonjones.endrod;
+package uk.co.oathompsonjones.fairylights.endrod;
 
 import com.google.common.collect.Lists;
 import net.minecraft.state.property.EnumProperty;

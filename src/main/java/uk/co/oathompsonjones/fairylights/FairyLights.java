@@ -1,4 +1,4 @@
-package uk.co.oathompsonjones;
+package uk.co.oathompsonjones.fairylights;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.item.DyeItem;

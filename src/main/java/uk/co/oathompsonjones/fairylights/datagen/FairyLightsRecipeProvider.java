@@ -1,4 +1,4 @@
-package uk.co.oathompsonjones.datagen;
+package uk.co.oathompsonjones.fairylights.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -10,8 +10,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.util.Identifier;
-import uk.co.oathompsonjones.FairyLights;
-import uk.co.oathompsonjones.FairyLightsBlocks;
+import uk.co.oathompsonjones.fairylights.FairyLights;
+import uk.co.oathompsonjones.fairylights.FairyLightsBlocks;
 
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -96,7 +96,10 @@ public class FairyLightsRecipeProvider extends FabricRecipeProvider {
                             FabricRecipeProvider.conditionsFromItem(Items.IRON_NUGGET)
                     )
                     .criterion(FabricRecipeProvider.hasItem(torch), FabricRecipeProvider.conditionsFromItem(torch))
-                    .offerTo(exporter, Identifier.of(FairyLights.MOD_ID, color + "_lantern"));
+                    .offerTo(
+                            exporter,
+                            Identifier.of(FairyLights.MOD_ID, color + "_lantern")
+                    );
 
             // Sea Lanterns
             Block seaLantern = FairyLightsBlocks.SEA_LANTERN_BLOCKS.get(color);

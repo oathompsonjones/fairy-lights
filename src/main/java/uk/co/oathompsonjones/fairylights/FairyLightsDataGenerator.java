@@ -1,8 +1,8 @@
-package uk.co.oathompsonjones;
+package uk.co.oathompsonjones.fairylights;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import uk.co.oathompsonjones.datagen.*;
+import uk.co.oathompsonjones.fairylights.datagen.*;
 
 public class FairyLightsDataGenerator implements DataGeneratorEntrypoint {
     @Override

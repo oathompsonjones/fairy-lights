@@ -1,4 +1,4 @@
-package uk.co.oathompsonjones.torch;
+package uk.co.oathompsonjones.fairylights.torch;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
@@ -6,8 +6,8 @@ import net.minecraft.block.WallTorchBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
-import uk.co.oathompsonjones.FairyLightsBlocks;
-import uk.co.oathompsonjones.FairyLightsParticles;
+import uk.co.oathompsonjones.fairylights.FairyLightsBlocks;
+import uk.co.oathompsonjones.fairylights.FairyLightsParticles;
 
 public class FairyLightsWallTorchBlock extends WallTorchBlock {
     private final String color;

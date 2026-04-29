@@ -1,4 +1,4 @@
-package uk.co.oathompsonjones.endrod;
+package uk.co.oathompsonjones.fairylights.endrod;
 
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.StringIdentifiable;

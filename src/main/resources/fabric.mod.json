@@ -17,13 +17,13 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "uk.co.oathompsonjones.FairyLights"
+      "uk.co.oathompsonjones.fairylights.FairyLights"
     ],
     "client": [
-      "uk.co.oathompsonjones.FairyLightsClient"
+      "uk.co.oathompsonjones.fairylights.FairyLightsClient"
     ],
     "fabric-datagen": [
-      "uk.co.oathompsonjones.FairyLightsDataGenerator"
+      "uk.co.oathompsonjones.fairylights.FairyLightsDataGenerator"
     ]
   },
   "mixins": [

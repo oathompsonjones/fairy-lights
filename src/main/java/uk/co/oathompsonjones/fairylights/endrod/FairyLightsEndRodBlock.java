@@ -1,4 +1,4 @@
-package uk.co.oathompsonjones.endrod;
+package uk.co.oathompsonjones.fairylights.endrod;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;

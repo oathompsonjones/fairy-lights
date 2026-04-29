@@ -1,4 +1,4 @@
-package uk.co.oathompsonjones;
+package uk.co.oathompsonjones.fairylights;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -12,9 +12,9 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import uk.co.oathompsonjones.endrod.FairyLightsEndRodBlock;
-import uk.co.oathompsonjones.torch.FairyLightsTorchItem;
-import uk.co.oathompsonjones.torch.FairyLightsWallTorchBlock;
+import uk.co.oathompsonjones.fairylights.endrod.FairyLightsEndRodBlock;
+import uk.co.oathompsonjones.fairylights.torch.FairyLightsTorchItem;
+import uk.co.oathompsonjones.fairylights.torch.FairyLightsWallTorchBlock;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -47,10 +47,8 @@ public class FairyLightsBlocks {
                     )
             ));
 
-    public static final Map<String, Block> END_ROD_BLOCKS = Arrays.stream(FairyLights.COLORS).collect(Collectors.toMap(
-            color -> color,
-            color -> register(
-                    new FairyLightsEndRodBlock(AbstractBlock.Settings.copy(Blocks.END_ROD).nonOpaque()),
+    public static final Map<String, Block> END_ROD_BLOCKS = Arrays.stream(FairyLights.COLORS).collect(Collectors.toMap(color -> color,
+            color -> register(new FairyLightsEndRodBlock(AbstractBlock.Settings.copy(Blocks.END_ROD).nonOpaque()),
                     color + "_end_rod"
             )
     ));

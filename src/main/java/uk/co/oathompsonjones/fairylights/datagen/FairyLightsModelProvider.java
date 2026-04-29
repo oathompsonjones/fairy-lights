@@ -1,4 +1,4 @@
-package uk.co.oathompsonjones.datagen;
+package uk.co.oathompsonjones.fairylights.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
@@ -6,10 +6,10 @@ import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
-import uk.co.oathompsonjones.FairyLights;
-import uk.co.oathompsonjones.FairyLightsBlocks;
-import uk.co.oathompsonjones.endrod.FairyLightsEndRodBlock;
-import uk.co.oathompsonjones.endrod.NullableDyeColor;
+import uk.co.oathompsonjones.fairylights.FairyLights;
+import uk.co.oathompsonjones.fairylights.FairyLightsBlocks;
+import uk.co.oathompsonjones.fairylights.endrod.FairyLightsEndRodBlock;
+import uk.co.oathompsonjones.fairylights.endrod.NullableDyeColor;
 
 import java.util.Optional;
 
